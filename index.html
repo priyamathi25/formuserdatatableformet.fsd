@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data Table Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color:darkturquoise;
+        }
+        h1,label
+        {
+            color: rgb(128, 0, 87);
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #0c0813;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ddd8e7;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Data Table Form</h1>
+    <form id="userDataForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <table id="userDataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        document.getElementById('userDataForm').addEventListener('submit', function(event) {
+            // Prevent the form from submitting by default
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const age = document.getElementById('age').value.trim();
+
+            // Validate the form fields
+            if (name === '' || email === '' || age === '') {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Add user data to the table
+            addUserToTable(name, email, age);
+
+            // Clear the form fields
+            document.getElementById('userDataForm').reset();
+        });
+
+        function addUserToTable(name, email, age) {
+            const tableBody = document.querySelector('#userDataTable tbody');
+
+            // Create a new row and populate it with user data
+            const newRow = tableBody.insertRow();
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+
+            cell1.textContent = name;
+            cell2.textContent = email;
+            cell3.textContent = age;
+        }
+    </script>
+</body>
+</html>
